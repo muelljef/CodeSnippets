@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Creating Many to Many Relationships in Laravel</title>
+    <title>Factories and Seeding</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="prism.css" rel="stylesheet">
     <script src="prism.js"></script>
@@ -48,14 +48,14 @@
             Create your Seeders from the command line
         </h2>
         <p>Command Line</p>
-        <pre>
-            <code>
+        <pre class="language-bash">
+            <code class="language-bash">
                 php artisan make:seeder UsersTripsTableSeeder
             </code>
-            <code>
+            <code class="language-bash">
                 php artisan make:seeder LocationsTableSeeder
             </code>
-            <code>
+            <code class="language-bash">
                 php artisan make:seeder LocationTripTableSeeder
             </code>
         </pre>
@@ -65,8 +65,8 @@
         </h2>
         <p>The Users Trips table seeder has some nested generation creating the users and trips while linking them at the same time</p>
         <p>UsersTripsTableSeeder.php</p>
-        <pre>
-            <code>
+        <pre class="language-php">
+            <code class="language-php">
                 public function run()
                 {
                     factory(App\User::class, 10)->create(['password' => bcrypt('password')])->each(function($u) {
@@ -79,14 +79,14 @@
             </code>
         </pre>
         <p>LocationsTableSeeder.php</p>
-        <pre>
-            <code>
+        <pre class="language-php">
+            <code class="language-php">
                 factory(App\Location::class, 10)->create();
             </code>
         </pre>
         <p>LocationTripTableSeeder.php</p>
-        <pre>
-            <code>
+        <pre class="language-php">
+            <code class="language-php">
                 factory(App\User::class, 10)->create(['password' => bcrypt('password')])->each(function($u) {
                     for($i = 0; $i < 2; $i++)
                     {
@@ -100,14 +100,14 @@
         </h2>
         <p>This is what is run when you use the seeding artisan command</p>
         <p>DatabaseSeeder.php</p>
-        <pre>
-            <code>
+        <pre class="language-php">
+            <code class="language-php">
                 protected $toTruncate = ['users', 'trips', 'locations', 'trip_user', 'location_trip'];
             </code>
         </pre>
         <p>DatabaseSeeder.php</p>
-        <pre>
-            <code>
+        <pre class="language-php">
+            <code class="language-php">
                 foreach ($this->toTruncate as $table)
                 {
                     DB::table($table)->truncate();

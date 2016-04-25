@@ -1,0 +1,14 @@
+                @extends('layouts.app')
+
+                @section('content')
+                    <h1>Trips</h1>
+                    <hr/>
+                    @foreach($trips as $trip)
+                        <article>
+                            <a href="{{ url('/trips', $trip->id) }}">
+                                <h2>{{ $trip->title }}</h2>
+                            </a>
+                            <div class="description">{{ $trip->description }}</div>
+                        </article>
+                    @endforeach
+                @stop
